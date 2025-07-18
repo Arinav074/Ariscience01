@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Science Lover - Ari</title>
+  <style>
+    :root {
+      --bg: #f0f8ff;
+      --text: #222;
+      --accent: #87ceeb;
+      --dark-bg: #121212;
+      --dark-text: #eee;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.5s, color 0.5s;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to right, #87ceeb, #b0e0e6);
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      z-index: 100;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #logo {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      font-weight: bold;
+      font-size: 28px;
+      gap: 8px;
+    }
+
+    .logo-text {
+      font-size: 28px;
+    }
+
+    #mode-label {
+      font-size: 16px;
+      opacity: 0.8;
+      user-select: none;
+      transition: color 0.5s;
+    }
+
+    main {
+      text-align: center;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto 60px;
+    }
+
+    #fact {
+      font-style: italic;
+      margin: 20px auto;
+      font-size: 20px;
+      animation: fadeIn 1s ease-in-out;
+      max-width: 600px;
+      padding: 15px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.5);
+      transition: background 0.5s;
+    }
+
+    #newFactBtn {
+      padding: 15px 25px;
+      background: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: transform 0.3s;
+      margin-bottom: 40px;
+    }
+
+    #newFactBtn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Scientist Section */
+    .scientist-section {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin: 50px auto;
+      max-width: 900px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s;
+    }
+
+    .scientist-img {
+      width: 180px;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .scientist-text {
+      flex: 1;
+      text-align: justify;
+      font-size: 18px;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .scientist-text p {
+      margin: 0;
+    }
+
+    .show-more-btn {
+      margin-top: 12px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s;
+    }
+    .show-more-btn:hover {
+      background: #039be5;
+    }
+
+    /* Shortened text container */
+    .short-text {
+      max-height: 120px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Dark mode styles */
+    .dark {
+      background: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    .dark header {
+      background: linear-gradient(to right, #000428, #004e92);
+    }
+
+    .dark #fact {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .dark .scientist-section {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .dark #mode-label {
+      color: var(--dark-text);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .scientist-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .scientist-img {
+        margin-bottom: 20px;
+      }
+
+      .scientist-text {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="logo" onclick="toggleDarkMode()" title="Toggle Light/Dark Mode">
+      <span id="mode-icon">☀️</span>
+      <span class="logo-text">Ari</span>
+      <span id="mode-label">Light Mode</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>Welcome to the World of Science!</h1>
+    <p id="fact">Loading a scientific fact...</p>
+    <button id="newFactBtn" onclick="loadFact()">🔬 Show Another Fact</button>
+
+    <!-- Scientist Sections -->
+    <section class="scientist-section" id="einstein-section">
+      <img src="einstein.jpg" alt="Albert Einstein" class="scientist-img" />
+      <div class="scientist-text">
+        <div class="short-text" id="einstein-short">
+          Albert Einstein (1879–1955) was a German-born theoretical physicist who revolutionized our understanding of the universe. He is best known for developing the theory of relativity, which transformed the way scientists view space, time, and gravity...
+        </div>
+        <div class="full-text" id="einstein-full" style="display:none;">
+          Albert Einstein (1879–1955) was a German-born theoretical physicist who revolutionized our understanding of the universe. He is best known for developing the theory of relativity, which transformed the way scientists view space, time, and gravity. Einstein's work laid the foundation for much of modern physics and earned him the Nobel Prize in Physics in 1921.
+          Born in Ulm, Germany, Einstein showed an early interest in mathematics and science. Despite a somewhat unconventional schooling experience, he excelled in subjects that fascinated him. He later attended the Swiss Federal Polytechnic in Zurich, where he studied physics and mathematics. After graduation, Einstein struggled to find a teaching job and spent several years working as a patent clerk in Bern, Switzerland. During this period, often called his "miracle year" in 1905, he published four groundbreaking papers that addressed the photoelectric effect, Brownian motion, special relativity, and the equivalence of mass and energy.
+          Einstein’s special theory of relativity introduced the famous equation E = mc², which expresses the equivalence of energy (E) and mass (m) with c representing the speed of light in a vacuum. This equation has profound implications, including the understanding that mass can be converted into energy, which paved the way for nuclear power and atomic weapons.
+          His general theory of relativity, published in 1915, extended these ideas to include gravity as the curvature of spacetime caused by mass and energy. This theory predicted phenomena such as the bending of light by gravity and the expansion of the universe, which were later confirmed by observations.
+          Einstein’s contributions were not limited to relativity. His work on the photoelectric effect demonstrated that light could behave as both a wave and a particle, supporting the emerging theory of quantum mechanics. For this, he received the Nobel Prize, acknowledging his role in explaining how light energy is quantized.
+          Throughout his life, Einstein was deeply committed to social justice, pacifism, and the promotion of scientific knowledge. He was an outspoken advocate for civil rights and spoke against racism and nationalism. When the Nazis rose to power in Germany, Einstein, who was Jewish, emigrated to the United States in 1933, where he took a position at Princeton University.
+          Einstein also became involved in political and humanitarian efforts. During World War II, he famously signed a letter to President Franklin D. Roosevelt warning about the potential development of atomic weapons by Nazi Germany, which helped initiate the Manhattan Project. However, after the war, he became a strong advocate for nuclear disarmament and global peace.
+          His influence extends beyond physics; Einstein became a cultural icon representing genius and creativity. His distinct appearance, with wild hair and a playful demeanor, has made him one of the most recognizable figures in history. Einstein’s quotes, such as “Imagination is more important than knowledge,” continue to inspire people worldwide.
+          In addition to his scientific achievements, Einstein made lasting contributions to philosophy and the popular understanding of science. He emphasized curiosity, skepticism, and the importance of questioning established ideas. Despite his fame, Einstein remained humble about his work, once remarking that he had no special talents but was passionately curious.
+          Einstein's legacy is vast. His theories underpin technologies such as GPS, which rely on corrections based on relativistic effects. His insights continue to drive research in cosmology, quantum physics, and the quest for a unified theory of everything.
+          In his later years, Einstein worked on unifying the forces of nature, attempting to develop a unified field theory, though this endeavor was not completed. He died in 1955 at the age of 76, leaving behind a profound impact on science and humanity.
+          His life story—from a patent clerk to the most celebrated physicist of the 20th century—is a testament to the power of curiosity, perseverance, and imagination. Albert Einstein remains an enduring symbol of human intellect and the pursuit of knowledge.
+        </div>
+        <button class="show-more-btn" onclick="toggleText('einstein')">Show More</button>
+      </div>
+    </section>
+
+    <section class="scientist-section" id="newton-section">
+      <img src="newton.jpg" alt="Isaac Newton" class="scientist-img" />
+      <div class="scientist-text">
+        <div class="short-text" id="newton-short">
+          Sir Isaac Newton (1643–1727) was an English mathematician, physicist, and astronomer widely recognized as one of the most influential scientists of all time...
+        </div>
+        <div class="full-text" id="newton-full" style="display:none;">
+          Sir Isaac Newton (1643–1727) was an English mathematician, physicist, and astronomer widely recognized as one of the most influential scientists of all time. He formulated the laws of motion and universal gravitation, laying the groundwork for classical mechanics.
+          Newton's work in optics included studying the nature of light and color. He also invented calculus independently. His book, *Philosophiæ Naturalis Principia Mathematica*, published in 1687, is considered one of the most important scientific works ever written.
+          Newton's discoveries deeply influenced science and philosophy and paved the way for the Enlightenment and modern physics.
+        </div>
+        <button class="show-more-btn" onclick="toggleText('newton')">Show More</button>
+      </div>
+    </section>
+
+    <section class="scientist-section" id="curie-section">
+      <img src="curie.jpg" alt="Marie Curie" class="scientist-img" />
+      <div class="scientist-text">
+        <div class="short-text" id="curie-short">
+          Marie Curie (1867–1934) was a pioneering physicist and chemist, famous for her work on radioactivity...
+        </div>
+        <div class="full-text" id="curie-full" style="display:none;">
+          Marie Curie (1867–1934) was a pioneering physicist and chemist, famous for her work on radioactivity. She was the first woman to win a Nobel Prize and remains the only person to win Nobel Prizes in two different sciences — Physics and Chemistry.
+          Curie's research discovered two new elements, polonium and radium, and laid the foundation for important advances in cancer treatment and nuclear physics.
+          Her dedication and groundbreaking work broke barriers for women in science and made lasting contributions to science and medicine.
+        </div>
+        <button class="show-more-btn" onclick="toggleText('curie')">Show More</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    let dark = false;
+
+    function toggleDarkMode() {
+      dark = !dark;
+      document.body.classList.toggle('dark', dark);
+
+      const modeIcon = document.getElementById('mode-icon');
+      const modeLabel = document.getElementById('mode-label');
+
+      if (dark) {
+        modeIcon.textContent = '🌙';
+        modeLabel.textContent = 'Dark Mode';
+      } else {
+        modeIcon.textContent = '☀️';
+        modeLabel.textContent = 'Light Mode';
+      }
+    }
+
+    const facts = [
+      "Water expands when it freezes, unlike most substances.",
+      "The human body contains about 37.2 trillion cells.",
+      "The sun is a nearly perfect sphere of hot plasma.",
+      "Light from the Sun takes 8 minutes and 20 seconds to reach Earth.",
+      "Carbon is the basis for all known life on Earth.",
+      "The universe is approximately 13.8 billion years old.",
+      "A single lightning bolt is five times hotter than the surface of the Sun.",
+      "Bananas are radioactive due to potassium-40.",
+      "The Earth’s magnetic field protects us from solar wind.",
+      "DNA stores genetic information in all living things.",
+      "Saturn could float in water because it’s mostly gas.",
+      "Sound travels four times faster in water than in air.",
+      "Octopuses have three hearts and blue blood.",
+      "An adult human skeleton has 206 bones.",
+      "Plants release oxygen through photosynthesis.",
+      "Neurons transmit signals at up to 120 m/s.",
+      "Black holes warp space and time around them.",
+      "The speed of light is about 299,792 km per second.",
+      "Most of the universe is made up of dark energy.",
+      "Butterflies can see ultraviolet light."
+    ];
+
+    function loadFact() {
+      const factElement = document.getElementById('fact');
+      const randomFact = facts[Math.floor(Math.random() * facts.length)];
+      factElement.textContent = randomFact;
+    }
+
+    window.onload = loadFact;
+
+    // Toggle show more / less for scientist bios
+    function toggleText(scientist) {
+      const shortText = document.getElementById(scientist + '-short');
+      const fullText = document.getElementById(scientist + '-full');
+      const btn = fullText.nextElementSibling || shortText.nextElementSibling; // The button itself
+
+      if (fullText.style.display === 'none') {
+        fullText.style.display = 'block';
+        shortText.style.display = 'none';
+        btn.textContent = 'Show Less';
+      } else {
+        fullText.style.display = 'none';
+        shortText.style.display = 'block';
+        btn.textContent = 'Show More';
+      }
+    }
+  </script>
+</body>
+</html>
